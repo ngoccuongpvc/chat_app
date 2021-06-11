@@ -3,9 +3,12 @@ services:
   api:
     build: ./api
     ports:
-      - "8080:8080"
+      - "8083:8083"
   frontend:
     build: ./public
+    volumes: 
+      - './public:/frontend'
+      - '/frontend/node_modules'
     ports:
       - "80:80"
 
@@ -15,11 +18,9 @@ services:
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin
-    ports:
-      - 5432:5432
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8081:8081
+      - 8080:8080
